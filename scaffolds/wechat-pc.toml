@@ -1,0 +1,43 @@
+id          = "wechat-pc"
+name        = "WeChat (PC)"
+homepage    = "https://weixin.qq.com/"
+risk        = "low"
+disclaimer  = "Only deletes media caches under FileStorage. Chat history is preserved; deleted media may show as missing when re-opening old conversations."
+
+detect = [
+  "**/Tencent/WeChat",
+  "**/WeChat Files/*/FileStorage",
+  "**/WeChat Files",
+]
+
+[match]
+name_contains    = ["WeChat Files", "WeChat"]
+must_have_child  = ["FileStorage"]
+
+[[scope]]
+id     = "image-cache"
+label  = "Image cache (FileStorage/Image)"
+glob   = "**/FileStorage/Image/**"
+mode   = "recycle"
+prompt = { kind = "days", default = 30, label = "Delete images older than (days)" }
+
+[[scope]]
+id     = "video-cache"
+label  = "Video cache (FileStorage/Video)"
+glob   = "**/FileStorage/Video/**"
+mode   = "recycle"
+prompt = { kind = "days", default = 7, label = "Delete videos older than (days)" }
+
+[[scope]]
+id     = "file-cache"
+label  = "Received files (FileStorage/File)"
+glob   = "**/FileStorage/File/**"
+mode   = "recycle"
+prompt = { kind = "days", default = 30, label = "Delete files older than (days)" }
+
+[[scope]]
+id     = "cache-misc"
+label  = "Misc cache (FileStorage/Cache)"
+glob   = "**/FileStorage/Cache/**"
+mode   = "recycle"
+prompt = { kind = "none" }
