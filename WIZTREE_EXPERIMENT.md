@@ -1,24 +1,22 @@
-# WizTree 集成实验
+# WizTree 后端实验
 
-此分支正在做 WizTree 后端集成实验。
+`wiztree_test` 分支 — 集成 WizTree 替代 walkdir 做磁盘扫描，目前只扫 C 盘。
 
-## ⚠️ 不要运行前端
+## 体验
 
 ```bash
-# ❌ 不要跑
-pnpm tauri dev
-
-# ✅ 只能跑这个
-cargo build -p diskwise-scanner
-cargo run -p diskwise-scanner --bin wiztree-cli
+cargo run -p diskwise-scanner --bin wiztree_cli
 ```
 
-## 实验目标
+要求：Windows + 已安装 WizTree。会自动找到 `WizTree64.exe`，扫 C 盘并导出 CSV，打印摘要。
 
-1. 调 WizTree64.exe 命令行自动扫描 C: 盘并导出 CSV
-2. 解析 CSV → Node 树
-3. 后续扩展到全盘
+可选对比 walkdir（选一个小目录，全盘很慢）：
 
-## 当前状态
+```bash
+cargo run -p diskwise-scanner --bin wiztree_cli -- --walkdir "C:\Program Files\WizTree"
+```
 
-MVP 阶段：扫 C 盘 + 导出 CSV。
+## 注意
+
+- 不要跑 `pnpm tauri dev`，前端没有对接
+- WizTree 扫 C 盘包含 CSV 写入，约 6-10 秒
