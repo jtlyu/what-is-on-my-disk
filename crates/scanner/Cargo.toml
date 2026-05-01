@@ -11,3 +11,4 @@ walkdir.workspace   = true
 anyhow.workspace    = true
 thiserror.workspace = true
 tracing.workspace   = true
+csv                 = "1.3"

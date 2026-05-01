@@ -149,6 +149,9 @@ pub fn sample_paths<P: AsRef<Path>>(root: P, n: usize) -> Vec<String> {
         .collect()
 }
 
+#[cfg(target_os = "windows")]
+pub mod wiztree;
+
 #[cfg(test)]
 mod tests {
     use super::*;
